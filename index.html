@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>豐萍專用系統</title>
+
+    <!-- 網頁分頁上的可愛小 Icon (Favicon) -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><path d=%22M20 80 L15 50 H85 L80 80 Z%22 fill=%22%23D8CFDC%22 stroke=%22%239E8BA9%22 stroke-width=%222%22 /><path d=%22M15 50 L5 40 H45 L50 50 Z%22 fill=%22%23E6E0EA%22 stroke=%22%239E8BA9%22 stroke-width=%221.5%22 /><path d=%22M85 50 L95 40 H55 L50 50 Z%22 fill=%22%23E6E0EA%22 stroke=%22%239E8BA9%22 stroke-width=%221.5%22 /><circle cx=%2253%22 cy=%2228%22 r=%228%22 fill=%22%234C4652%22 /><rect x=%2250%22 y=%2225%22 width=%226%22 height=%224%22 rx=%221%22 fill=%22%239E8BA9%22 /><circle cx=%2278%22 cy=%2228%22 r=%228%22 fill=%22%234C4652%22 /><rect x=%2275%22 y=%2225%22 width=%226%22 height=%224%22 rx=%221%22 fill=%22%239E8BA9%22 /><circle cx=%2265%22 cy=%2242%22 r=%2217%22 fill=%22%23FDFBFE%22 stroke=%22%234C4652%22 stroke-width=%222%22 /><ellipse cx=%2259%22 cy=%2240%22 rx=%223%22 ry=%224.5%22 fill=%22%234C4652%22 /><circle cx=%2259%22 cy=%2238.5%22 r=%221.2%22 fill=%22%23FFFFFF%22 /><ellipse cx=%2271%22 cy=%2240%22 rx=%223%22 ry=%224.5%22 fill=%22%234C4652%22 /><circle cx=%2271%22 cy=%2238.5%22 r=%221.2%22 fill=%22%23FFFFFF%22 /><path d=%22M65 43.5 Q65.5 44 66 43.5%22 fill=%22none%22 stroke=%22%234C4652%22 stroke-width=%221%22 /><path d=%22M59 47.5 Q65 53 71 47.5%22 fill=%22none%22 stroke=%22%234C4652%22 stroke-width=%222%22 stroke-linecap=%22round%22 /><circle cx=%2256%22 cy=%2246%22 r=%223.5%22 fill=%22%23D4C1D4%22 opacity=%220.6%22 /><circle cx=%2274%22 cy=%2246%22 r=%223.5%22 fill=%22%23D4C1D4%22 opacity=%220.6%22 /><circle cx=%2238%22 cy=%2248%22 r=%2217%22 fill=%22%23FDFBFE%22 stroke=%22%234C4652%22 stroke-width=%222%22 /><path d=%22M33 32 Q38 25 43 32%22 fill=%22none%22 stroke=%22%234C4652%22 stroke-width=%222%22 stroke-linecap=%22round%22 /><ellipse cx=%2232%22 cy=%2246%22 rx=%223%22 ry=%224.5%22 fill=%22%234C4652%22 /><circle cx=%2232%22 cy=%2244.5%22 r=%221.2%22 fill=%22%23FFFFFF%22 /><ellipse cx=%2244%22 cy=%2246%22 rx=%223%22 ry=%224.5%22 fill=%22%234C4652%22 /><circle cx=%2244%22 cy=%2244.5%22 r=%221.2%22 fill=%22%23FFFFFF%22 /><path d=%22M38 49.5 Q38.5 50 39 49.5%22 fill=%22none%22 stroke=%22%234C4652%22 stroke-width=%221%22 /><path d=%22M32 53.5 Q38 59 44 53.5%22 fill=%22none%22 stroke=%22%234C4652%22 stroke-width=%222%22 stroke-linecap=%22round%22 /><circle cx=%2229%22 cy=%2252%22 r=%223.5%22 fill=%22%23D4C1D4%22 opacity=%220.6%22 /><circle cx=%2247%22 cy=%2252%22 r=%223.5%22 fill=%22%23D4C1D4%22 opacity=%220.6%22 /></svg>">
+
+    <link rel="stylesheet" href="DDlistN.css">
+    <!-- 引入 Google Fonts 添加現代活潑的圓潤字體 -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- 登入畫面 -->
+    <div id="login-screen" class="login-screen">
+        <div class="login-box">
+            <h2>🔐 系統登入</h2>
+            <p>請輸入帳號密碼以取得導覽權限</p>
+            <div class="input-group">
+                <input type="text" id="username" placeholder="帳號">
+            </div>
+            <div class="input-group">
+                <input type="password" id="password" placeholder="密碼">
+            </div>
+            <p id="login-error" class="error-msg" style="display: none;">帳號或密碼錯誤！</p>
+            <button id="login-btn" class="login-btn">登入</button>
+        </div>
+    </div>
+
+    <!-- 原本的主容器，預設先隱藏 -->
+    <div class="app-container" id="app-container" style="display: none;">
+        <!-- 左側導覽列 -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2 style="display: flex; align-items: center;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="36" height="36"
+                        style="margin-right: 8px; flex-shrink: 0;">
+                        <!-- 紙箱底部與內側 -->
+                        <path d="M20 80 L15 50 H85 L80 80 Z" fill="#D8CFDC" stroke="#9E8BA9" stroke-width="2" />
+                        <!-- 紙箱掀蓋 -->
+                        <path d="M15 50 L5 40 H45 L50 50 Z" fill="#E6E0EA" stroke="#9E8BA9" stroke-width="1.5" />
+                        <path d="M85 50 L95 40 H55 L50 50 Z" fill="#E6E0EA" stroke="#9E8BA9" stroke-width="1.5" />
+
+                        <!-- 女孩 (右) -->
+                        <circle cx="53" cy="28" r="8" fill="#4C4652" /> <!-- 左馬尾 -->
+                        <rect x="50" y="25" width="6" height="4" rx="1" fill="#9E8BA9" /> <!-- 蝴蝶結中心 -->
+                        <circle cx="78" cy="28" r="8" fill="#4C4652" /> <!-- 右馬尾 -->
+                        <rect x="75" y="25" width="6" height="4" rx="1" fill="#9E8BA9" /> <!-- 蝴蝶結中心 -->
+                        <circle cx="65" cy="42" r="17" fill="#FDFBFE" stroke="#4C4652" stroke-width="2" />
+                        <!-- 動漫大眼 -->
+                        <ellipse cx="59" cy="40" rx="3" ry="4.5" fill="#4C4652" />
+                        <circle cx="59" cy="38.5" r="1.2" fill="#FFFFFF" />
+                        <ellipse cx="71" cy="40" rx="3" ry="4.5" fill="#4C4652" />
+                        <circle cx="71" cy="38.5" r="1.2" fill="#FFFFFF" />
+                        <!-- 鼻子與小嘴 -->
+                        <path d="M65 43.5 Q65.5 44 66 43.5" fill="none" stroke="#4C4652" stroke-width="1" />
+                        <path d="M59 47.5 Q65 53 71 47.5" fill="none" stroke="#4C4652" stroke-width="2"
+                            stroke-linecap="round" />
+                        <!-- 腮紅 -->
+                        <circle cx="56" cy="46" r="3.5" fill="#D4C1D4" opacity="0.6" />
+                        <circle cx="74" cy="46" r="3.5" fill="#D4C1D4" opacity="0.6" />
+
+                        <!-- 幼童 (左) -->
+                        <circle cx="38" cy="48" r="17" fill="#FDFBFE" stroke="#4C4652" stroke-width="2" />
+                        <path d="M33 32 Q38 25 43 32" fill="none" stroke="#4C4652" stroke-width="2"
+                            stroke-linecap="round" />
+                        <!-- 動漫大眼 -->
+                        <ellipse cx="32" cy="46" rx="3" ry="4.5" fill="#4C4652" />
+                        <circle cx="32" cy="44.5" r="1.2" fill="#FFFFFF" />
+                        <ellipse cx="44" cy="46" rx="3" ry="4.5" fill="#4C4652" />
+                        <circle cx="44" cy="44.5" r="1.2" fill="#FFFFFF" />
+                        <!-- 鼻子與小嘴 -->
+                        <path d="M38 49.5 Q38.5 50 39 49.5" fill="none" stroke="#4C4652" stroke-width="1" />
+                        <path d="M32 53.5 Q38 59 44 53.5" fill="none" stroke="#4C4652" stroke-width="2"
+                            stroke-linecap="round" />
+                        <!-- 腮紅 -->
+                        <circle cx="29" cy="52" r="3.5" fill="#D4C1D4" opacity="0.6" />
+                        <circle cx="47" cy="52" r="3.5" fill="#D4C1D4" opacity="0.6" />
+                    </svg>
+                    豐萍專用系統
+                </h2>
+                <button id="pin-sidebar" class="toggle-btn" title="鎖定選單">🔓</button>
+            </div>
+
+            <!-- 選單清單的容器，將由 JavaScript 動態產生 -->
+            <nav class="folder-tree" id="folder-tree">
+                <!-- 預留結構，後續交給 JS 生成內容 -->
+            </nav>
+
+            <div class="sidebar-footer">
+                <p>版本 v1.0</p>
+                <p>更新: 2026/04/07</p>
+            </div>
+        </aside>
+
+        <!-- 右側主要內容區 -->
+        <main class="main-content">
+            <!-- 展開側邊欄的懸浮按鈕 (一開始是隱藏的) -->
+            <button id="show-sidebar" class="float-btn" title="展開選單" style="display: none;">☰</button>
+            <div id="hover-trigger" class="hover-trigger" style="display: none;"></div>
+
+            <!-- 分頁標籤列 (一開始隱藏) -->
+            <div id="tabs-header-wrapper" class="tabs-header-wrapper" style="display: none;">
+                <div id="tabs-container" class="tabs-container"></div>
+                <button id="close-all-tabs" class="close-all-btn">🧹 一鍵關閉</button>
+            </div>
+
+            <!-- 實際渲染 Google Sheet 或歡迎畫面的區域 -->
+            <div id="iframe-container" class="iframe-container">
+                <!-- 未選取檔案時的歡迎畫面 -->
+                <div class="welcome-screen" id="welcome-screen">
+                    <h3>👋 歡迎使用！</h3>
+                    <p>每個人都有自己的時區⏱️</p>
+                    <p>有人走得快些🚀</p>
+                    <p>有人走得慢些🐢</p>
+                    <p>但只要你還在前進🏃‍♂️</p>
+                    <p>就沒有所謂的落後🐌</p>
+                    <p>那些看似平凡的堅持🙋🏻‍♀️</p>
+                    <p>其實都在默默紮根🌱</p>
+                    <p>那些你獨自熬過的時刻🎊</p>
+                    <p>終將成為照亮未來的光✨</p>
+                </div>
+                <!-- 到時候 Javascript 會把許多 <iframe class="sheet-frame"> 塞進這裡 -->
+            </div>
+        </main>
+    </div>
+
+    <script src="DDlistN.js"></script>
+</body>
+
+</html>
