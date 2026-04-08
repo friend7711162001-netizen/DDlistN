@@ -201,9 +201,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener("visibilitychange", () => {
         if (document.visibilityState === "visible") {
             const now = Date.now();
-            // 超過 1 分鐘沒重整才自動重整，避免頻繁切換導致過載
-            if (now - lastRefreshTime > 60000) {
-                console.log("偵測到頁面回到焦點，執行智慧型自動更新...");
+            // 超過 30 分鐘沒重整才自動重整，避免頻繁切換導致過載
+            if (now - lastRefreshTime > 1800000) {
+                console.log("偵測到頁面回到焦點且已過 30 分鐘執行智慧型自動更新...");
                 refreshAllTabs();
                 lastRefreshTime = now;
             }
