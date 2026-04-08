@@ -338,6 +338,28 @@ body {
     color: #cc0000;
 }
 
+/* 全部重整按鈕樣式 */
+.refresh-all-btn {
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-right: 6px;
+    margin-bottom: 6px;
+    transition: all 0.2s;
+    white-space: nowrap;
+    align-self: flex-end;
+}
+
+.refresh-all-btn:hover {
+    background-color: #e0f2ff;
+    border-color: #9eccff;
+    color: #0066cc;
+}
+
 /* 展開側欄的懸浮按鈕 */
 .float-btn {
     position: absolute;

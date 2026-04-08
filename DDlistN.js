@@ -46,7 +46,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "61.219.113.251", // 公司固定 IP1
         "61.219.113.252", // 公司固定 IP2
         "1.175.177.14",    // 新增的第二個 IP
-        "1.175.146.55"
+        "1.175.146.55",
+        "114.47.162.40" 
     ];
 
     // 驗證帳號密碼與 IP 的非同步函式
@@ -115,6 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const tabsContainer = document.getElementById("tabs-container");
     const tabsHeaderWrapper = document.getElementById("tabs-header-wrapper");
     const closeAllTabsBtn = document.getElementById("close-all-tabs");
+    const refreshAllTabsBtn = document.getElementById("refresh-all-tabs");
     const welcomeScreen = document.getElementById("welcome-screen");
 
     // ======== 多分頁狀態與管理函式 ========
@@ -173,6 +175,40 @@ document.addEventListener("DOMContentLoaded", () => {
     if (closeAllTabsBtn) {
         closeAllTabsBtn.addEventListener("click", closeAllTabs);
     }
+
+    // 全部重整功能
+    function refreshAllTabs() {
+        if (openedTabs.length === 0) return;
+        
+        openedTabs.forEach(tab => {
+            // 透過重設 src 強制 iframe 重新載入
+            const currentSrc = tab.iframeEl.src;
+            tab.iframeEl.src = "";
+            tab.iframeEl.src = currentSrc;
+        });
+        
+        // 顯示一個短暫的提示或日誌（選用）
+        console.log("所有分頁已重整");
+    }
+
+    // 點擊全部重整按鈕
+    if (refreshAllTabsBtn) {
+        refreshAllTabsBtn.addEventListener("click", refreshAllTabs);
+    }
+
+    // 智慧型更新：當頁面回到焦點時自動重整
+    let lastRefreshTime = Date.now();
+    document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "visible") {
+            const now = Date.now();
+            // 超過 1 分鐘沒重整才自動重整，避免頻繁切換導致過載
+            if (now - lastRefreshTime > 60000) {
+                console.log("偵測到頁面回到焦點，執行智慧型自動更新...");
+                refreshAllTabs();
+                lastRefreshTime = now;
+            }
+        }
+    });
 
     function openTab(name, url) {
         tabsHeaderWrapper.style.display = "flex"; // 確保分頁列有顯示
